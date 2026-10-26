@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>yuan | Profile</title>
+    <meta
+      name="description"
+      content="Modern mobile-first model profile page for yuan."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sand: '#f5f1ee',
+              ink: '#2d2d2d',
+              soft: '#6d7278',
+              sky: '#b9dff9',
+              skyStrong: '#8ec8f3',
+              line: '#eae7e4',
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <div class="profile-card">
+        <section class="hero-wrap" aria-label="Model gallery">
+          <div class="photo-frame">
+            <div class="swiper mySwiper" aria-live="polite">
+              <div id="gallerySlides" class="swiper-wrapper"></div>
+            </div>
+          </div>
+          <div class="swiper-pagination" aria-label="Gallery pagination"></div>
+        </section>
+
+        <nav id="socialLinks" class="social-links" aria-label="Social media links"></nav>
+
+        <section class="info-box" aria-label="Profile information">
+          <div class="info-header">
+            <h1 id="profileName"></h1>
+            <div id="profileSubName" class="sub-name"></div>
+          </div>
+          <div id="profileInfo" class="info-grid"></div>
+        </section>
+
+        <section class="career-section" aria-label="Career information">
+          <header class="career-header">
+            <h2 id="careerTitle"></h2>
+            <p id="careerSubtitle"></p>
+          </header>
+          <div class="divider"></div>
+
+          <div class="career-tabs" role="tablist" aria-label="Career tabs">
+            <button class="tab-button active" type="button" data-target="latest-info">最新情報</button>
+            <button class="tab-button" type="button" data-target="careerAccordion">芸歴</button>
+          </div>
+        </section>
+
+        <section id="careerAccordion" class="career-accordion" aria-label="Career history accordion"></section>
+
+        <section id="latest-info" class="events-wrap" aria-label="Latest event information">
+          <h2 id="latestTitle" class="events-header"></h2>
+          <div id="latestInfoList" class="event-list"></div>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>

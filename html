@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aoi Sora | Profile</title>
+    <meta
+      name="description"
+      content="Elegant model profile page with gallery, social links, and event highlights."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sand: '#f5f1ee',
+              mist: '#f7f8fb',
+              ink: '#2d2d2d',
+              soft: '#6d7278',
+              sky: '#b9dff9',
+              skyStrong: '#8ec8f3',
+              panel: '#ffffff',
+              line: '#eae7e4',
+            },
+            boxShadow: {
+              soft: '0 14px 34px rgba(31, 41, 55, 0.08)',
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <style>
+      :root {
+        --bg: #f5f1ee;
+        --panel: #ffffff;
+        --ink: #2f2f31;
+        --muted: #6a7075;
+        --line: #ece7e4;
+        --sky: #bfe3ff;
+        --sky-strong: #8ecdf5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", "Segoe UI", sans-serif;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .page-shell {
+        min-height: 100vh;
+        padding: 18px 14px 42px;
+      }
+
+      .profile-card {
+        width: min(100%, 480px);
+        margin: 0 auto;
+      }
+
+      .photo-frame {
+        position: relative;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(28, 30, 40, 0.08);
+        border: 1px solid rgba(214, 214, 214, 0.6);
+      }
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .photo-frame .swiper {
+        border-radius: 28px;
+      }
+
+      .photo-frame .swiper-slide {
+        background: #eee;
+      }
+
+      .swiper-pagination {
+        position: relative !important;
+        margin-top: 14px;
+      }
+
+      .swiper-pagination-bullet {
+        width: 9px;
+        height: 9px;
+        background: rgba(110, 118, 124, 0.25);
+        opacity: 1;
+        transition: all 0.25s ease;
+      }
+
+      .swiper-pagination-bullet-active {
+        width: 22px;
+        border-radius: 999px;
+        background: var(--sky-strong);
+      }
+
+      .social-links {
+        margin-top: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .social-link:hover,
+      .social-link:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(142, 205, 245, 0.9);
+        box-shadow: 0 12px 24px rgba(142, 205, 245, 0.18);
+      }
+
+      .social-link svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .info-box {
+        margin-top: 24px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(216, 220, 223, 0.9);
+        border-radius: 24px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+        overflow: hidden;
+      }
+
+      .info-header {
+        padding: 18px 20px 8px;
+      }
+
+      .info-header h1 {
+        margin: 0;
+        font-size: clamp(1.65rem, 4vw, 2.1rem);
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0 20px 18px;
+      }
+
+      .info-row {
+        display: flex;
+        gap: 12px;
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .info-row:first-child {
+        border-top: none;
+      }
+
+      .info-label {
+        min-width: 100px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .info-value {
+        flex: 1;
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      .events-wrap {
+        margin-top: 30px;
+      }
+
+      .events-header {
+        margin: 0 0 14px;
+        font-size: clamp(1.15rem, 4vw, 1.5rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .event-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .event-card {
+        display: block;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px 16px;
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .event-card:hover,
+      .event-card:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(142, 205, 245, 0.75);
+        box-shadow: 0 14px 28px rgba(142, 205, 245, 0.12);
+      }
+
+      .event-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .event-title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .event-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 76px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        background: rgba(191, 227, 255, 0.7);
+        color: #2a4c67;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .event-meta {
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      @media (min-width: 640px) {
+        .page-shell {
+          padding-top: 28px;
+        }
+
+        .profile-card {
+          width: min(100%, 560px);
+        }
+
+        .photo-frame {
+          border-radius: 34px;
+        }
+
+        .social-links {
+          gap: 18px;
+        }
+
+        .info-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0 10px;
+        }
+
+        .info-row {
+          align-items: flex-start;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .profile-card {
+          width: min(100%, 760px);
+        }
+
+        .hero-wrap {
+          max-width: 540px;
+          margin: 0 auto;
+        }
+
+        .info-box {
+          margin-top: 28px;
+        }
+
+        .event-list {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <div class="profile-card">
+        <section class="hero-wrap" aria-label="Model gallery">
+          <div class="photo-frame">
+            <div class="swiper mySwiper" aria-live="polite">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
+                    alt="Model portrait in soft natural light"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80"
+                    alt="Model smiling portrait"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80"
+                    alt="Model in outdoor fashion pose"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
+                    alt="Model with a calm elegant expression"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
+                    alt="Model profile view in studio lighting"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=900&q=80"
+                    alt="Model in a relaxed pose"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination" aria-label="Gallery pagination"></div>
+        </section>
+
+        <nav class="social-links" aria-label="Social media links">
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="social-link"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1"></circle>
+            </svg>
+          </a>
+          <a
+            href="https://mixch.tv/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="social-link"
+            aria-label="MixChannel"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 12 2.5Zm3.15 13.73a.93.93 0 0 1-1.31.31l-1.96-1.31a.6.6 0 0 0-.82.08l-.32.35a1.14 1.14 0 0 1-1.62.08l-1.18-1.02a.76.76 0 0 1-.2-1.08l.29-.45a.9.9 0 0 1 1.2-.2l1.5 1.05a.73.73 0 0 0 1-.12l.82-.9a1.14 1.14 0 0 1 1.56-.12l1.08 1a.72.72 0 0 1 .2 1.04Zm-2.35-7.15a1.08 1.08 0 1 1-1.08-1.08 1.08 1.08 0 0 1 1.08 1.08Z"/>
+            </svg>
+          </a>
+          <a
+            href="https://x.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="social-link"
+            aria-label="X"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.9 2h3.5l-7.63 8.72L23.1 22h-6.9l-5.4-7.72L4.3 22H.8l8.16-9.32L.7 2h7.08l4.88 7.12L18.9 2Zm-1.2 18h1.92L7.12 3.9H5.08L17.7 20Z"/>
+            </svg>
+          </a>
+        </nav>
+
+        <section class="info-box" aria-label="Profile information">
+          <div class="info-header">
+            <h1>Aoi Sora</h1>
+          </div>
+          <div class="info-grid">
+            <div class="info-row">
+              <div class="info-label">Birthday</div>
+              <div class="info-value">2000 / 05 / 18</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Blood Type</div>
+              <div class="info-value">A</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">MBTI</div>
+              <div class="info-value">ENFP</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Hobby</div>
+              <div class="info-value">Photography, café hopping, yoga</div>
+            </div>
+            <div class="info-row" style="grid-column: 1 / -1;">
+              <div class="info-label">Favorite</div>
+              <div class="info-value">Soft jazz, fresh flowers, minimal design, sunsets</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="events-wrap" aria-label="Participated events">
+          <h2 class="events-header">Participated Events</h2>
+          <div class="event-list">
+            <a
+              class="event-card"
+              href="https://example.com/events/spring-fashion-show"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="event-topline">
+                <h3 class="event-title">Spring Fashion Show</h3>
+                <span class="event-tag">2025</span>
+              </div>
+              <div class="event-meta">Tokyo · Featured runway model</div>
+            </a>
+
+            <a
+              class="event-card"
+              href="https://example.com/events/summer-photo-festival"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="event-topline">
+                <h3 class="event-title">Summer Photo Festival</h3>
+                <span class="event-tag">2024</span>
+              </div>
+              <div class="event-meta">Osaka · Editorial session</div>
+            </a>
+
+            <a
+              class="event-card"
+              href="https://example.com/events/winter-visual-campaign"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="event-topline">
+                <h3 class="event-title">Winter Visual Campaign</h3>
+                <span class="event-tag">2023</span>
+              </div>
+              <div class="event-meta">Kyoto · Brand ambassador</div>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper('.mySwiper', {
+        loop: true,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        grabCursor: true,
+        spaceBetween: 0,
+      });
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aoi Sora | Profile</title>
+    <meta
+      name="description"
+      content="Elegant model profile page with gallery, social links, and event highlights."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sand: '#f5f1ee',
+              mist: '#f7f8fb',
+              ink: '#2d2d2d',
+              soft: '#6d7278',
+              sky: '#b9dff9',
+              skyStrong: '#8ec8f3',
+              panel: '#ffffff',
+              line: '#eae7e4',
+            },
+            boxShadow: {
+              soft: '0 14px 34px rgba(31, 41, 55, 0.08)',
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <style>
+      :root {
+        --bg: #f5f1ee;
+        --panel: #ffffff;
+        --ink: #2f2f31;
+        --muted: #6a7075;
+        --line: #ece7e4;
+        --sky: #bfe3ff;
+        --sky-strong: #8ecdf5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", "Segoe UI", sans-serif;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .page-shell {
+        min-height: 100vh;
+        padding: 18px 14px 42px;
+      }
+
+      .profile-card {
+        width: min(100%, 480px);
+        margin: 0 auto;
+      }
+
+      .photo-frame {
+        position: relative;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(28, 30, 40, 0.08);
+        border: 1px solid rgba(214, 214, 214, 0.6);
+      }
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .photo-frame .swiper {
+        border-radius: 28px;
+      }
+
+      .photo-frame .swiper-slide {
+        background: #eee;
+      }
+
+      .swiper-pagination {
+        position: relative !important;
+        margin-top: 14px;
+      }
+
+      .swiper-pagination-bullet {
+        width: 9px;
+        height: 9px;
+        background: rgba(110, 118, 124, 0.25);
+        opacity: 1;
+        transition: all 0.25s ease;
+      }
+
+      .swiper-pagination-bullet-active {
+        width: 22px;
+        border-radius: 999px;
+        background: var(--sky-strong);
+      }
+
+      .social-links {
+        margin-top: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .social-link:hover,
+      .social-link:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(142, 205, 245, 0.9);
+        box-shadow: 0 12px 24px rgba(142, 205, 245, 0.18);
+      }
+
+      .social-link svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .info-box {
+        margin-top: 24px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(216, 220, 223, 0.9);
+        border-radius: 24px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+        overflow: hidden;
+      }
+
+      .info-header {
+        padding: 18px 20px 8px;
+      }
+
+      .info-header h1 {
+        margin: 0;
+        font-size: clamp(1.65rem, 4vw, 2.1rem);
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0 20px 18px;
+      }
+
+      .info-row {
+        display: flex;
+        gap: 12px;
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .info-row:first-child {
+        border-top: none;
+      }
+
+      .info-label {
+        min-width: 100px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .info-value {
+        flex: 1;
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      .events-wrap {
+        margin-top: 30px;
+      }
+
+      .events-header {
+        margin: 0 0 14px;
+        font-size: clamp(1.15rem, 4vw, 1.5rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .event-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .event-card {
+        display: block;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px 16px;
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .event-card:hover,
+      .event-card:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(142, 205, 245, 0.75);
+        box-shadow: 0 14px 28px rgba(142, 205, 245, 0.12);
+      }
+
+      .event-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .event-title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .event-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 76px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        background: rgba(191, 227, 255, 0.7);
+        color: #2a4c67;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .event-meta {
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      @media (min-width: 640px) {
+        .page-shell {
+          padding-top: 28px;
+        }
+
+        .profile-card {
+          width: min(100%, 560px);
+        }
+
+        .photo-frame {
+          border-radius: 34px;
+        }
+
+        .social-links {
+          gap: 18px;
+        }
+
+        .info-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0 10px;
+        }
+
+        .info-row {
+          align-items: flex-start;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .profile-card {
+          width: min(100%, 760px);
+        }
+
+        .hero-wrap {
+          max-width: 540px;
+          margin: 0 auto;
+        }
+
+        .info-box {
+          margin-top: 28px;
+        }
+
+        .event-list {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <div class="profile-card">
+        <section class="hero-wrap" aria-label="Model gallery">
+          <div class="photo-frame">
+            <div class="swiper mySwiper" aria-live="polite">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
+                    alt="Model portrait in soft natural light"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80"
+                    alt="Model smiling portrait"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80"
+                    alt="Model in outdoor fashion pose"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
+                    alt="Model with a calm elegant expression"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
+                    alt="Model profile view in studio lighting"
+                  />
+                </div>
+                <div class="swiper-slide">
+                  <img
+                    src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=900&q=80"
+                    alt="Model in a relaxed pose"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination" aria-label="Gallery pagination"></div>
+        </section>
+
+        <nav class="social-links" aria-label="Social media links">
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="social-link"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1"></circle>
+            </svg>
+          </a>
+          <a
+            href="https://mixch.tv/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="social-link"
+            aria-label="MixChannel"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 12 2.5Zm3.15 13.73a.93.93 0 0 1-1.31.31l-1.96-1.31a.6.6 0 0 0-.82.08l-.32.35a1.14 1.14 0 0 1-1.62.08l-1.18-1.02a.76.76 0 0 1-.2-1.08l.29-.45a.9.9 0 0 1 1.2-.2l1.5 1.05a.73.73 0 0 0 1-.12l.82-.9a1.14 1.14 0 0 1 1.56-.12l1.08 1a.72.72 0 0 1 .2 1.04Zm-2.35-7.15a1.08 1.08 0 1 1-1.08-1.08 1.08 1.08 0 0 1 1.08 1.08Z"/>
+            </svg>
+          </a>
+          <a
+            href="https://x.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="social-link"
+            aria-label="X"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.9 2h3.5l-7.63 8.72L23.1 22h-6.9l-5.4-7.72L4.3 22H.8l8.16-9.32L.7 2h7.08l4.88 7.12L18.9 2Zm-1.2 18h1.92L7.12 3.9H5.08L17.7 20Z"/>
+            </svg>
+          </a>
+        </nav>
+
+        <section class="info-box" aria-label="Profile information">
+          <div class="info-header">
+            <h1>Aoi Sora</h1>
+          </div>
+          <div class="info-grid">
+            <div class="info-row">
+              <div class="info-label">Birthday</div>
+              <div class="info-value">2000 / 05 / 18</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Blood Type</div>
+              <div class="info-value">A</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">MBTI</div>
+              <div class="info-value">ENFP</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Hobby</div>
+              <div class="info-value">Photography, café hopping, yoga</div>
+            </div>
+            <div class="info-row" style="grid-column: 1 / -1;">
+              <div class="info-label">Favorite</div>
+              <div class="info-value">Soft jazz, fresh flowers, minimal design, sunsets</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="events-wrap" aria-label="Participated events">
+          <h2 class="events-header">Participated Events</h2>
+          <div class="event-list">
+            <a
+              class="event-card"
+              href="https://example.com/events/spring-fashion-show"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="event-topline">
+                <h3 class="event-title">Spring Fashion Show</h3>
+                <span class="event-tag">2025</span>
+              </div>
+              <div class="event-meta">Tokyo · Featured runway model</div>
+            </a>
+
+            <a
+              class="event-card"
+              href="https://example.com/events/summer-photo-festival"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="event-topline">
+                <h3 class="event-title">Summer Photo Festival</h3>
+                <span class="event-tag">2024</span>
+              </div>
+              <div class="event-meta">Osaka · Editorial session</div>
+            </a>
+
+            <a
+              class="event-card"
+              href="https://example.com/events/winter-visual-campaign"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="event-topline">
+                <h3 class="event-title">Winter Visual Campaign</h3>
+                <span class="event-tag">2023</span>
+              </div>
+              <div class="event-meta">Kyoto · Brand ambassador</div>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper('.mySwiper', {
+        loop: true,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        grabCursor: true,
+        spaceBetween: 0,
+      });
+    </script>
+  </body>
+</html>
